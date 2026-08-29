@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1 · 图像滤波与边缘检测</title>
+    <style>
+        /* ====== 全局样式（与主页保持一致） ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.7;
+            padding: 2rem 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ====== 导航返回 ====== */
+        .nav-back {
+            margin-bottom: 2rem;
+        }
+        .nav-back a {
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+        .nav-back a:hover {
+            color: #0f172a;
+            border-bottom-color: #94a3b8;
+        }
+
+        /* ====== 页面头部 ====== */
+        .project-header {
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1.5rem;
+        }
+        .project-header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+        }
+        .project-header p {
+            font-size: 1.05rem;
+            color: #475569;
+            margin-top: 0.2rem;
+        }
+
+        /* ====== 每个展示区块 ====== */
+        .section {
+            margin-bottom: 3.5rem;
+        }
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.3rem;
+        }
+        .section .desc {
+            font-size: 1rem;
+            color: #334155;
+            margin-bottom: 1.2rem;
+            background: #f1f5f9;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid #94a3b8;
+        }
+
+        /* ====== 图片网格（核心：横向排布） ====== */
+        .image-grid {
+            display: grid;
+            gap: 1.2rem;
+            /* 自动适应列数：每列最小 200px，最大等分剩余空间 */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        /* 图片卡片 */
+        .image-grid figure {
+            background: #ffffff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06);
+            border: 1px solid #e9edf2;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin: 0;
+        }
+        .image-grid figure:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(0,0,0,0.12);
+        }
+
+        .image-grid img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10; /* 统一图片比例，更整齐 */
+            object-fit: cover;
+            background: #eef2f6; /* 图片加载时的占位色 */
+        }
+
+        .image-grid figcaption {
+            padding: 0.7rem 0.9rem 0.9rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #334155;
+            text-align: center;
+            background: #fafcfd;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        /* ====== 页脚 ====== */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        /* ====== 移动端适配 ====== */
+        @media (max-width: 600px) {
+            body { padding: 1.2rem 1rem; }
+            .project-header h1 { font-size: 1.6rem; }
+            .image-grid {
+                grid-template-columns: 1fr; /* 手机屏幕变为单列 */
+                gap: 1rem;
+            }
+            .section .desc {
+                padding: 0.6rem 1rem;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航：返回主页 -->
+    <div class="nav-back">
+        <a href="../index.html">← 返回作品集</a>
+    </div>
+
+    <!-- 项目头部 -->
+    <header class="project-header">
+        <h1>📷 Project 1：图像滤波与边缘检测</h1>
+        <p>对比不同卷积核在去噪、锐化和边缘提取任务中的表现。</p>
+    </header>
+
+    <!-- ========================================= -->
+    <!-- 第 1 个展示区块：2 张对比图 -->
+    <!-- ========================================= -->
+    <section class="section">
+        <h2>1. 噪声抑制对比</h2>
+        <div class="desc">
+            高斯滤波 <strong>vs.</strong> 中值滤波：在椒盐噪声下的去噪效果对比。
+        </div>
+        <div class="image-grid">
+            <figure>
+                <img src="./media/img1.jpg" alt="原图添加椒盐噪声">
+                <figcaption>📌 原图（含椒盐噪声）</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/img2.jpg" alt="中值滤波结果">
+                <figcaption>✅ 中值滤波（3x3）</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 第 2 个展示区块：3 张对比图 -->
+    <!-- ========================================= -->
+    <section class="section">
+        <h2>2. 不同高斯核尺寸对比</h2>
+        <div class="desc">
+            固定 σ=1.5，分别采用 3x3、5x5、7x7 的卷积核，观察模糊程度与细节保留。
+        </div>
+        <div class="image-grid">
+            <figure>
+                <img src="./media/img3.jpg" alt="高斯核 3x3">
+                <figcaption>🔹 3x3 核</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/img4.jpg" alt="高斯核 5x5">
+                <figcaption>🔸 5x5 核</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/img5.jpg" alt="高斯核 7x7">
+                <figcaption>🔹 7x7 核</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 第 3 个展示区块：4 张对比图 -->
+    <!-- ========================================= -->
+    <section class="section">
+        <h2>3. 边缘检测算子对比</h2>
+        <div class="desc">
+            分别使用 Sobel、Prewitt、Roberts 和 Laplacian 算子进行边缘提取，比较响应灵敏度。
+        </div>
+        <div class="image-grid">
+            <figure>
+                <img src="./media/img6.jpg" alt="Sobel 算子">
+                <figcaption>⬛ Sobel</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/img7.jpg" alt="Prewitt 算子">
+                <figcaption>⬜ Prewitt</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/img8.jpg" alt="Roberts 算子">
+                <figcaption>⬛ Roberts</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/img9.jpg" alt="Laplacian 算子">
+                <figcaption>⬜ Laplacian</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        © 2026 Henry Xue · CS180 Project 1
+    </div>
+
+</body>
+</html>
