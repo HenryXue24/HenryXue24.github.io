@@ -181,10 +181,12 @@
         <div class="desc">
             <strong>Explanation:</strong>Single-scale alignment on the low-resolution images 
             Firstly, we crop the picture into three equal parts, which is expected to be the three 
-            channles. Next, we set the first channel, which is blue, as the reference position. 
+            channles. <br>
+            Next, we set the first channel, which is blue, as the reference position. <br>
             Then, we shift R and B channel to every position with dx,dy larger than -15 and smaller than 15, and
-             check the SSD score considering the channel and Blue channel. In the end, we record the position
-            with the lowest SSD score, and save the shifted and combined image.
+            check the SSD score considering the channel and Blue channel. <br>
+            In the end, we record the position
+            with the lowest SSD score, and save the shifted and combined image.<br>
         </div>
     </section>
 
@@ -258,15 +260,22 @@
             </figure>
         </div>
         <div class="desc">
-            <strong>Explanation:</strong>Single-scale alignment on the low-resolution images 
-            Firstly, we crop the picture into three equal parts, which is expected to be the three 
-            channles. Next, we set the first channel, which is blue, as the reference position. 
+            <strong>Explanation:</strong>multi-scale pyramid alignment
+            At the very beginning, we downsample the image to a very low resolution, and then we perform the same.
+            We repeatedly downsample the image to get a 50% smaller one from the previous smallest to get
+            a piramid of images, anti-aliasing methiod is used at the time.<br>
+
+            Then we to almost the same: we crop the picture into three equal parts, which is expected to be the three 
+            channles. Next, we set the first channel, which is blue, as the reference position. <br>
+
+            Shift R and B channel to every position with dx,dy larger than -15 and smaller than 15, and
+            check the SSD score considering the channel and Blue channel. <br>
+
+            we record the best position and use it as the center for the next upper layer in the 
+            pyramid. The range we check on each layer is covers half the range of the previous layer. 
+            This helps us avoid being misled by a mistake made on previous layer.<br>
             
-            Then, we shift R and B channel to every position with dx,dy larger than -15 and smaller than 15, and
-            check the SSD score considering the channel and Blue channel. 
-            
-            In the end, we record the position
-            with the lowest SSD score, and save the shifted and combined image.
+            In the end, we record the position with the lowest SSD score, and save the shifted and combined image.<br>
         </div>
     </section>
 
