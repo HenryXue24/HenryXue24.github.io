@@ -178,6 +178,14 @@
                 <figcaption>tobolsk</figcaption>
             </figure>
         </div>
+        <div class="desc">
+            <strong>Explanation:</strong>Single-scale alignment on the low-resolution images 
+            Firstly, we crop the picture into three equal parts, which is expected to be the three 
+            channles. Next, we set the first channel, which is blue, as the reference position. 
+            Then, we shift R and B channel to every position with dx,dy larger than -15 and smaller than 15, and
+             check the SSD score considering the channel and Blue channel. In the end, we record the position
+            with the lowest SSD score, and save the shifted and combined image.
+        </div>
     </section>
 
     <section class="section">
@@ -248,6 +256,17 @@
                 <img src="./media/pyramid/small/out_tobolsk.jpg" alt="comparison of tobolsk">
                 <figcaption>tobolsk</figcaption>
             </figure>
+        </div>
+        <div class="desc">
+            <strong>Explanation:</strong>Single-scale alignment on the low-resolution images 
+            Firstly, we crop the picture into three equal parts, which is expected to be the three 
+            channles. Next, we set the first channel, which is blue, as the reference position. 
+            
+            Then, we shift R and B channel to every position with dx,dy larger than -15 and smaller than 15, and
+            check the SSD score considering the channel and Blue channel. 
+            
+            In the end, we record the position
+            with the lowest SSD score, and save the shifted and combined image.
         </div>
     </section>
 
