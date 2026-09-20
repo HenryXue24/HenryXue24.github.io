@@ -161,20 +161,45 @@
     </header>
 
     <section class="section">
-        <h2>Part 1.1</h2>
+        <h2>Part 1.1: Convolutions from Scratch!</h2>
         <div class="desc">
-            Selfie: The Wrong Way <strong>vs.</strong> The Right Way 
+            In this part, I implemented convolution operations from scratch, 
+            exploring how different filters affect image processing. 
         </div>
         <div class="image-grid">
             <figure>
-                <img src="./media/img1.png" alt="selfies">
-                <figcaption>comparison of selfie from different distance</figcaption>
+                <img src="./media/1.1/img1.png" alt="selfie">
+                <figcaption>Original selfie</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/1.1/gray.webp" alt="selfies read as grayscale">
+                <figcaption>Grascale</figcaption>
             </figure>
         </div>
-        <div class="code-block">
-            <pre><code class="language-python">def greet(name):
-                print(f"Hello, {name}")
+        <div class="desc">
+            I processed the image above, using convolution. The following are results of 'box_blur', 
+            'vertical derivative',and 'horizontal derivative'.
+        </div>
+        <div class="image-grid">
+            <figure>
+                <img src="./media/1.1/box_blur.webp" alt="selfie with box blur filter">
+                <figcaption>Box Blur</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/1.1/dy.webp" alt="selfie with vertical derivative filter">
+                <figcaption>Vertical Derivative</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/1.1/dx.webp" alt="selfie with horizontal derivative filter">
+                <figcaption>Horizontal Derivative</figcaption>
+            </figure>
+            </figure>
+        </div>
 
+        <div class="code-block">
+            <pre><code class="language-python">
+                def greet(name):
+                    print(f"Hello, {name}")
                 greet("world")
             </code></pre>
         </div>
