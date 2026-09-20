@@ -173,7 +173,7 @@
             </figure>
             <figure>
                 <img src="./media/1.1/gray.webp" alt="selfies read as grayscale">
-                <figcaption>Grascale</figcaption>
+                <figcaption>Grayscale</figcaption>
             </figure>
         </div>
         <div class="desc">
@@ -198,9 +198,115 @@
 
         <div class="code-block">
             <pre><code class="language-python">
-                def greet(name):
-                    print(f"Hello, {name}")
-                greet("world")
+                import numpy as np
+                import skimage as sk
+                import skimage.io as skio   
+
+
+                def _prepare_conv(image, kernel, mode='same'):
+                    image = np.asarray(image, dtype=np.float64)
+                    kernel = np.asarray(kernel, dtype=np.float64)               
+
+                    if image.ndim != 2 or kernel.ndim != 2:
+                        raise ValueError("image and kernel must be 2D arrays")              
+
+                    H, W = image.shape
+                    kh, kw = kernel.shape               
+
+                    if mode == 'full':
+                        pad_top = pad_bottom = kh - 1
+                        pad_left = pad_right = kw - 1
+                        out_h = H + kh - 1
+                        out_w = W + kw - 1              
+
+                    elif mode == 'same':
+                        pad_top = kh // 2
+                        pad_bottom = (kh - 1) // 2
+                        pad_left = kw // 2
+                        pad_right = (kw - 1) // 2
+                        out_h = H
+                        out_w = W               
+
+                    elif mode == 'valid':
+                        if H < kh or W < kw:
+                            raise ValueError("valid mode requires kernel <= image in both dimensions")
+                        pad_top = pad_bottom = pad_left = pad_right = 0
+                        out_h = H - kh + 1
+                        out_w = W - kw + 1              
+
+                    else:
+                        raise ValueError("mode must be 'full', 'same', or 'valid'")             
+
+                    padded_image = np.pad(
+                        image,
+                        ((pad_top, pad_bottom), (pad_left, pad_right)),
+                        mode='constant',
+                        constant_values=0.0
+                    )               
+
+                    flipped_kernel = kernel[::-1, ::-1]             
+
+                    return padded_image, flipped_kernel, out_h, out_w               
+
+
+                def convolve2d_4loops(image, kernel, mode='same'):
+                    padded_image, flipped_kernel, out_h, out_w = _prepare_conv(image, kernel, mode)
+                    kh, kw = flipped_kernel.shape               
+
+                    out = np.zeros((out_h, out_w), dtype=np.float64)                
+
+                    for i in range(out_h):
+                        for j in range(out_w):
+                            for m in range(kh):
+                                for n in range(kw):
+                                    out[i, j] += padded_image[i + m, j + n] * flipped_kernel[m, n]              
+
+                    return out              
+
+
+                def convolve2d_2loops(image, kernel, mode='same'):
+                    padded_image, flipped_kernel, out_h, out_w = _prepare_conv(image, kernel, mode)
+                    kh, kw = flipped_kernel.shape               
+
+                    out = np.zeros((out_h, out_w), dtype=np.float64)                
+
+                    for i in range(out_h):
+                        for j in range(out_w):
+                            window = padded_image[i:i + kh, j:j + kw]
+                            out[i, j] = np.sum(window * flipped_kernel)             
+
+                    return out
+
+                imname = 'img1.3.png'   
+
+                im_gray = skio.imread(imname, as_gray=True)
+                im_gray = sk.img_as_float(im_gray)  
+
+                # Define filters
+                box_filter = np.ones((9, 9)) / 81.0 
+                Dx = np.array([[1, -1]])    
+                Dy = np.array([[1], [-1]])      
+
+                box_blur = convolve2d_2loops(im_gray, box_filter, mode='same')
+                dx = convolve2d_2loops(im_gray, Dx, mode='same')
+                dy = convolve2d_2loops(im_gray, Dy, mode='same')    
+
+                # save
+                def save_float_image(path, img):
+                    img = np.asarray(img, dtype=np.float64)
+                    img_min = img.min()
+                    img_max = img.max()
+                    if img_max - img_min > 1e-12:
+                        img = (img - img_min) / (img_max - img_min)
+                    else:
+                        img = np.zeros_like(img)
+                    skio.imsave(path, sk.img_as_ubyte(img)) 
+
+
+                save_float_image('gray.webp', im_gray)
+                save_float_image('box_blur.webp', box_blur)
+                save_float_image('dx.webp', dx)
+                save_float_image('dy.webp', dy) 
             </code></pre>
         </div>
 
