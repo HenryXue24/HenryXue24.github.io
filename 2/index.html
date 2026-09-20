@@ -168,7 +168,7 @@
         </div>
         <div class="image-grid">
             <figure>
-                <img src="./media/1.1/img1.png" alt="selfie">
+                <img src="./media/1.1/img1.3.png" alt="selfie">
                 <figcaption>Original selfie</figcaption>
             </figure>
             <figure>
@@ -315,37 +315,58 @@
         <script>Prism.highlightAll();</script>
 
 
-
-
-
-
-
-
-
     </section>
 
     <section class="section">
-        <h2>Part 1.2</h2>
+        <h2>Part 1.2:Finite Difference Operator</h2>
         <div class="desc">
-            Selfie: The Wrong Way <strong>vs.</strong> The Right Way 
+            We read the image of cameraman, and than convolve it with the finite difference operator to get the gradient image.
         </div>
         <div class="image-grid">
             <figure>
-                <img src="./media/img1.png" alt="selfies">
-                <figcaption>comparison of selfie from different distance</figcaption>
+                <img src="./media/1.2/cameraman.png" alt="cameraman">
+                <figcaption>Original cameraman image</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/1.2/dx_dog.png" alt="dx_dog">
+                <figcaption>horizontal derivative image</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/1.2/dy_dog.png" alt="dy_dog">
+                <figcaption>vertical derivative image</figcaption>
+            </figure>
+        </div>
+        <div class="desc">
+            Then calculate 'sqrt(dx^2 + dy^2)' to get the gradient magnitude image. 
+            I also made a binarized image by thresholding the gradient magnitude image.
+        </div>
+        <div class="image-grid">
+            <figure>
+                <img src="./media/1.2/gradient_magnitude.png" alt="gradient_magnitude">
+                <figcaption>Gradient magnitude image</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/1.2/binary_edges.png" alt="binarized">
+                <figcaption>Binarized image (Threshold = 0.25)</figcaption>
             </figure>
         </div>
     </section>
 
     <section class="section">
-        <h2>Part 1.3</h2>
+        <h2>Part 1.3: Derivative of Gaussian (DoG) Filter</h2>
         <div class="desc">
-            Selfie: The Wrong Way <strong>vs.</strong> The Right Way 
+            Firstly, we blur the image with Gaussian filter G created by convloving two 1D Gaussian filters. 
+            Then, we calculate the horizontal and vertical derivatives of the blurred image, and get the gradient magnitude image. 
+            Finally, we binarize the gradient magnitude image by thresholding.
         </div>
         <div class="image-grid">
             <figure>
-                <img src="./media/img1.png" alt="selfies">
-                <figcaption>comparison of selfie from different distance</figcaption>
+                <img src="./media/1.3/mag_dog.png" alt="mag_dog">
+                <figcaption>Gradient magnitude of blurred image </figcaption>
+            </figure>
+            <figure>
+                <img src="./media/1.3/binary_edges.png" alt="binarized">
+                <figcaption>Binarized image (Threshold = 0.09)</figcaption>
             </figure>
         </div>
     </section>
