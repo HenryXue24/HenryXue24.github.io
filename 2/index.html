@@ -178,7 +178,10 @@
         </div>
         <div class="desc">
             I processed the image above, using convolution. The following are results of 'box_blur', 
-            'vertical derivative',and 'horizontal derivative'.
+            'vertical derivative',and 'horizontal derivative'. The result is same when using scipy.signal.convolve2d
+            but it is much faster. Hand written version requires 7.8s to yield the following three pictures, 
+            while scipy.signal.convolve2d requires 1.3s. Boundaries used zero padding, namely pad (kernelsize//2)
+            rows of pixel on four boundaries with (0 ,0 ,0).
         </div>
         <div class="image-grid">
             <figure>
@@ -339,6 +342,7 @@
         <div class="desc">
             Then calculate 'sqrt(dx^2 + dy^2)' to get the gradient magnitude image. 
             I also made a binarized image by thresholding the gradient magnitude image.
+            A few dots in the backgroud can't be tatally removed because higher theshold may blur the man's face.
         </div>
         <div class="image-grid">
             <figure>
@@ -357,7 +361,8 @@
         <div class="desc">
             Firstly, we blur the image with Gaussian filter G created by convloving two 1D Gaussian filters. 
             Then, we calculate the horizontal and vertical derivatives of the blurred image, and get the gradient magnitude image. 
-            Finally, we binarize the gradient magnitude image by thresholding.
+            Finally, we binarize the gradient magnitude image by thresholding. Compared with finite difference method
+            DoG is less sensetive to high frequency in the background and can detect edges more smoothly.
         </div>
         <div class="image-grid">
             <figure>
@@ -389,6 +394,23 @@
             <figure>
                 <img src="./media/2.1/recovered.webp" alt="taj_blurred">
                 <figcaption>Sharpened image of Taj Mahal</figcaption>
+            </figure>
+
+        </div><div class="desc">
+            Here is another picture I've chozen, a cat, with varying sharpening amount.
+        </div>
+        <div class="image-grid">
+            <figure>
+                <img src="./media/2.1/cat.jpg" alt="cat">
+                <figcaption>Original image of cat</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/2.1/cat2.webp" alt="cat_sharpened">
+                <figcaption>Sharpened image of cat</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/2.1/cat3.webp" alt="cat_sharpened">
+                <figcaption>An even sharpener image of cat</figcaption>
             </figure>
 
         </div>
