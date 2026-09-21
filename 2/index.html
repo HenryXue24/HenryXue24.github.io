@@ -106,7 +106,7 @@
             display: block;
             width: 100%;
             height: auto;
-            aspect-ratio: 16 / 10; /* 统一图片比例，更整齐 */
+            aspect-ratio: 16 / 12; /* 统一图片比例，更整齐 */
             object-fit: cover;
             background: #eef2f6; /* 图片加载时的占位色 */
         }
@@ -397,14 +397,71 @@
     <section class="section">
         <h2>Part 2.2</h2>
         <div class="desc">
-            sthsthsth
+            In this part, I experimented with different filters and frequencies to create unique images.
+            As is shown below is the reproduce of classic hybrid image.
         </div>
         <div class="image-grid">
             <figure>
-                <img src="./media/img6.jpg" alt="sthsthsth">
-                <figcaption>bulabulabula</figcaption>
+                <img src="./media/2.2/nutmeg_aligned.jpg" alt="nutmeg_aligned">
+                <figcaption>Original image of nutmeg</figcaption>
             </figure>
-
+            <figure>
+                <img src="./media/2.2/DerekPicture_aligned.jpg" alt="DerekPicture_aligned">
+                <figcaption>Original image of Derek</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/2.2/hybrid_grey.webp" alt="hybrid_grey">
+                <figcaption>Hybrid image of nutmeg and Derek</figcaption>
+            </figure>
+        </div>
+        <div class="desc">
+            We can find out the truth of this hybrid from frequency space.
+        </div>
+        <div class="image-grid">
+            <figure>
+                <img src="./media/2.2/g1.png" alt="frequency of cat">
+                <figcaption>Frequency space of cat</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/2.2/g1_high.png" alt="frequency of cat">
+                <figcaption> Filtered frequency space of cat</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/2.2/im1_high_pass.webp" alt="filtered cat">
+                <figcaption> Filtered cat</figcaption>
+            </figure>
+        </div>
+        <div class="image-grid">
+            <figure>
+                <img src="./media/2.2/g2.png" alt="frequency of man">
+                <figcaption>Frequency space of man</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/2.2/g2_low.png" alt="frequency of man">
+                <figcaption>Frequency space of man</figcaption>
+            </figure>
+            <figure>
+                <img src="./media/2.2/im2_low_pass.webp" alt="filtered man">
+                <figcaption> Filtered man</figcaption>
+            </figure>
+        </div>
+        <div class="image-grid">
+            <figure>
+                <img src="./media/2.2/g_hybrid.png" alt="hybrid_frequency">
+                <figcaption>Hybrid frequency of nutmeg and Derek</figcaption>
+            </figure>
+        </div>
+        <div class="desc">
+            More examples
+        </div>
+        <div class="desc">
+            Bells & Whistles: colored version
+        </div>
+        <div class="image-grid">
+            <figure>
+                <img src="./media/2.2/hybrid_conv.webp" alt="colored hybrid">
+                <figcaption>Colored hybrid image of nutmeg and Derek</figcaption>
+            </figure>
         </div>
     </section>
 
