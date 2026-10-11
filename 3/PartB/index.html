@@ -198,6 +198,7 @@
                 <p>The D = 128 denoiser is trained for five epochs with batch size 256, Adam learning rate 0.0001, and noise level σ = 0.5.</p>
                 <div class="image-grid">
                     <figure><img src="./media/1.2.1/MSE.png" alt="Denoiser mean squared error over optimizer steps"><figcaption>Training loss</figcaption></figure>
+                    </div><div class="image-grid">
                     <figure><img src="./media/1.2.1/epoch1.png" alt="Clean, noisy, and denoised MNIST samples after epoch 1"><figcaption>Clean, noisy, and denoised · epoch 1</figcaption></figure>
                     <figure><img src="./media/1.2.1/epoch5.png" alt="Clean, noisy, and denoised MNIST samples after epoch 5"><figcaption>Clean, noisy, and denoised · epoch 5</figcaption></figure>
                 </div>
@@ -220,6 +221,7 @@
                 <p>A separate UNet maps independent Gaussian noise inputs to MNIST digits. With MSE, a fixed input tends toward the conditional mean of the training digits.</p>
                 <div class="image-grid">
                     <figure><img src="./media/1.2.3/MSE.png" alt="Pure-noise denoiser mean squared error over optimizer steps"><figcaption>Training loss</figcaption></figure>
+                    </div><div class="image-grid">
                     <figure><img src="./media/1.2.3/epoch1.png" alt="Pure noise and generated digit outputs after epoch 1"><figcaption>Pure-noise inputs and outputs · epoch 1</figcaption></figure>
                     <figure><img src="./media/1.2.3/epoch5.png" alt="Pure noise and generated digit outputs after epoch 5"><figcaption>Pure-noise inputs and outputs · epoch 5</figcaption></figure>
                 </div>
@@ -274,6 +276,7 @@
                     <figure><img src="./media/2.6/conditioned_epoch1.png" alt="Class-conditioned MNIST samples after epoch 1"><figcaption>Scheduled model · epoch 1</figcaption></figure>
                     <figure><img src="./media/2.6/conditioned_epoch5.png" alt="Class-conditioned MNIST samples after epoch 5"><figcaption>Scheduled model · epoch 5</figcaption></figure>
                     <figure><img src="./media/2.6/conditioned_epoch10.png" alt="Class-conditioned MNIST samples after epoch 10"><figcaption>Scheduled model · epoch 10</figcaption></figure>
+                    </div><div class="image-grid">
                     <figure><img src="./media/2.6/no_scheduler_epoch1.png" alt="Class-conditioned samples from the constant-learning-rate model after epoch 1"><figcaption>Constant learning rate · epoch 1</figcaption></figure>
                     <figure><img src="./media/2.6/no_scheduler_epoch5.png" alt="Class-conditioned samples from the constant-learning-rate model after epoch 5"><figcaption>Constant learning rate · epoch 5</figcaption></figure>
                     <figure><img src="./media/2.6/no_scheduler_epoch10.png" alt="Class-conditioned samples from the constant-learning-rate model after epoch 10"><figcaption>Constant learning rate · epoch 10</figcaption></figure>
