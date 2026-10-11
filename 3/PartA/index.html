@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 1 · sthsthsth</title>
+    <title>Project 3 · Part A: Exploring the Power of Flow Models</title>
     <style>
         /* ====== 全局样式（与主页保持一致） ====== */
         * {
@@ -106,8 +106,8 @@
             display: block;
             width: 100%;
             height: auto;
-            aspect-ratio: 16 / 10; /* 统一图片比例，更整齐 */
-            object-fit: cover;
+            max-height: 650px;
+            object-fit: contain;
             background: #eef2f6; /* 图片加载时的占位色 */
         }
 
@@ -119,6 +119,51 @@
             text-align: center;
             background: #fafcfd;
             border-top: 1px solid #f1f5f9;
+        }
+
+        .section-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem 1.4rem;
+            margin: -1rem 0 3rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-nav a {
+            color: #315d66;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .section-nav a:hover {
+            color: #9a4938;
+            text-decoration: underline;
+        }
+        .exercise {
+            margin: 2rem 0 2.5rem;
+        }
+        .exercise h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #263c42;
+            margin-bottom: 0.65rem;
+        }
+        .exercise p {
+            margin-bottom: 1rem;
+            color: #475569;
+        }
+        .hybrid-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+        }
+        .hybrid-grid img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .hybrid-grid .small-view img {
+            width: 60px;
+            margin: 0.8rem auto;
         }
 
         /* ====== 页脚 ====== */
@@ -147,61 +192,167 @@
     </style>
 </head>
 <body>
-
-    <!-- 导航：返回主页 -->
     <div class="nav-back">
         <a href="../index.html">← return</a>
     </div>
 
-    <!-- heading -->
     <header class="project-header">
-        <h1>📷 Project 0: Becoming Friends with Your Camera FA26</h1>
-        <p>distort,Perspective Compression and Dolly Zoom</p>
+        <h1>Project 3 | Part A: Exploring the Power of Flow Models</h1>
+        <p>Flow matching, conditional generation, and creative applications with pretrained flow models.</p>
     </header>
 
-    <section class="section">
-        <h2>Part 1</h2>
-        <div class="desc">
-            Selfie: The Wrong Way <strong>vs.</strong> The Right Way 
-        </div>
-        <div class="image-grid">
-            <figure>
-                <img src="./media/img1.png" alt="selfies">
-                <figcaption>comparison of selfie from different distance</figcaption>
-            </figure>
-        </div>
-    </section>
+    <nav class="section-nav" aria-label="Project sections">
+        <a href="#part-1">1. Training and Sampling</a>
+        <a href="#part-2">2. Guidance</a>
+        <a href="#part-3">3. Creative Applications</a>
+    </nav>
 
-    <section class="section">
-        <h2>Part 2</h2>
-        <div class="desc">
-            sthsthsth
-        </div>
-        <div class="image-grid">
-            <figure>
-                <img src="./media/img3.jpg" alt="sthsthsth">
-                <figcaption>bulabulabula</figcaption>
-            </figure>
+    <main>
+        <section class="section" id="part-1">
+            <h2>1. Visualizing Training and Sampling</h2>
+            <p class="desc">The flow path is x<sub>t</sub> = (1 − t)ε + tx<sub>1</sub>: t = 0 is noise and t = 1 is the clean image.</p>
 
-        </div>
-    </section>
+            <article class="exercise">
+                <h3>1.1 Constructing Noisy Training Inputs</h3>
+                <p>A single noise sample is interpolated with the original image at three time steps.</p>
+                <div class="image-grid">
+                    <figure><img src="./media/1.1/original1.png" alt="Original image used for flow interpolation"><figcaption>Original image</figcaption></figure>
+                </div><div class="image-grid">
+                    <figure><img src="./media/1.1/noisy_input.png" alt="Original image and interpolated inputs at t equals 0.25, 0.50, and 0.75"><figcaption>Interpolated inputs at t = 0.25, 0.50, 0.75</figcaption></figure>
+                </div>
+            </article>
 
-    <section class="section">
-        <h2>Part 3</h2>
-        <div class="desc">
-            sthsthsth
-        </div>
-        <div class="image-grid">
-            <figure>
-                <img src="./media/img6.jpg" alt="sthsthsth">
-                <figcaption>bulabulabula</figcaption>
-            </figure>
+            <article class="exercise">
+                <h3>1.2 Classical Denoising</h3>
+                <p>Gaussian blur is applied after restoring the clean-image amplitude. The panels compare blur strengths.</p>
+                <div class="image-grid">
+                    <figure><img src="./media/1.2/classical_denoise_sigma1.png" alt="Classical denoising with Gaussian blur sigma 1"><figcaption>Gaussian blur, σ = 1</figcaption></figure>
+                    </div><div class="image-grid">
+                    <figure><img src="./media/1.2/classical_denoise_sigma2.png" alt="Classical denoising with Gaussian blur sigma 2"><figcaption>Gaussian blur, σ = 2</figcaption></figure>
+                    </div><div class="image-grid">
+                    <figure><img src="./media/1.2/classical_denoise_sigma8.png" alt="Classical denoising with Gaussian blur sigma 8"><figcaption>Gaussian blur, σ = 8</figcaption></figure>
+                </div>
+            </article>
 
-        </div>
-    </section>
+            <article class="exercise">
+                <h3>1.3 One-Step Denoising</h3>
+                <p>The model predicts a velocity once at each time, then uses it to estimate the clean image.</p>
+                <div class="image-grid">
+                    <figure><img src="./media/1.3/one_step_denoise1.png" alt="One-step denoising at the first time step"><figcaption>t = 0.25</figcaption></figure>
+                    </div><div class="image-grid">
+                    <figure><img src="./media/1.3/one_step_denoise2.png" alt="One-step denoising at the second time step"><figcaption>t = 0.50</figcaption></figure>
+                    </div><div class="image-grid">
+                    <figure><img src="./media/1.3/one_step_denoise3.png" alt="One-step denoising at the third time step"><figcaption>t = 0.75</figcaption></figure>
+                </div>
+            </article>
+
+            <article class="exercise">
+                <h3>1.4 Visualizing Velocity</h3>
+                <p>Predicted and ground-truth updates are compared with a per-pixel RGB RMS error map.</p>
+                <div class="image-grid">
+                    <figure><img src="./media/1.4/visuallize_velocity_t=0.25.png" alt="Velocity update comparison and error map at t equals 0.25"><figcaption>t = 0.25</figcaption></figure>
+                    </div><div class="image-grid">
+                    <figure><img src="./media/1.4/visuallize_velocity_t=0.5.png" alt="Velocity update comparison and error map at t equals 0.50"><figcaption>t = 0.50</figcaption></figure>
+                    </div><div class="image-grid">
+                    <figure><img src="./media/1.4/visuallize_velocity_t=0.75.png" alt="Velocity update comparison and error map at t equals 0.75"><figcaption>t = 0.75</figcaption></figure>
+                </div>
+            </article>
+
+            <article class="exercise">
+                <h3>1.5 Iterative Denoising with Euler Sampling</h3>
+                <p>Repeated velocity updates reconstruct the image from the same noisy input; results are compared with blur and one-step denoising.</p>
+                <div class="image-grid">
+                    <figure><img src="./media/1.5/euler_sampling_denoise.png" alt="Euler sampling trajectory for iterative denoising"><figcaption>Euler sampling trajectory</figcaption></figure>
+                    </div><div class="image-grid">
+                    <figure><img src="./media/1.5/compare_results_of_above_methods.png" alt="Comparison of classical blur, one-step, and Euler denoising"><figcaption>Blur, one-step, and Euler comparison</figcaption></figure>
+                </div>
+            </article>
+
+            <article class="exercise">
+                <h3>1.6 Generating Images from Noise</h3>
+                <p>Five independent Gaussian noise samples are integrated with the prompt “a high quality photo.”</p>
+                <div class="image-grid">
+                    <figure><img src="./media/1.6/generate_from_noise.png" alt="Five generated images sampled from independent noise seeds"><figcaption>Five samples · seeds 180–184</figcaption></figure>
+                </div>
+            </article>
+        </section>
+
+        <section class="section" id="part-2">
+            <h2>2. Conditional Generation and Guidance</h2>
+            <p class="desc">Classifier-free guidance combines conditional and unconditional velocity predictions. The prompt is “a high quality photo” and the guidance weight is 7.</p>
+            <article class="exercise">
+                <h3>2.1 Classifier-Free Guidance</h3>
+                <p>Five guided samples use the same initial noise seeds as Section 1.6, making the guidance effect easier to compare.</p>
+                <div class="image-grid">
+                    <figure><img src="./media/2.1/guidence.png" alt="Five classifier-free guidance samples at guidance weight 7"><figcaption>Guidance weight w = 7 · seeds 180–184</figcaption></figure>
+                </div>
+            </article>
+        </section>
+
+        <section class="section" id="part-3">
+            <h2>3. Creative Applications</h2>
+            <p class="desc">Image editing and visual illusions use Euler step size 0.02 and classifier-free guidance weight 7.</p>
+
+            <article class="exercise">
+                <h3>3.1 Image-to-Image Editing</h3>
+                <p>Seven starting times control how much of each source image is preserved during editing.</p>
+                <div class="image-grid">
+                    <figure><img src="./media/3.1/companile.png" alt="Campanile edits across seven starting times"><figcaption>Campanile</figcaption></figure>
+                    <figure><img src="./media/3.1/subway.png" alt="Personal image edits across seven starting times"><figcaption>Personal image</figcaption></figure>
+                    <figure><img src="./media/3.1/cat.png" alt="Second personal image edits across seven starting times"><figcaption>Personal image</figcaption></figure>
+                    </div><div class="image-grid">
+                    <figure><img src="./media/3.1/online_image_devil.png" alt="Web image edits across seven starting times"><figcaption>Web image</figcaption></figure>
+                    <figure><img src="./media/3.1/handdrawn_figure.png" alt="First hand-drawn image edits across seven starting times"><figcaption>Hand-drawn image</figcaption></figure>
+                    <figure><img src="./media/3.1/handdrawn_senery.png" alt="Second hand-drawn image edits across seven starting times"><figcaption>Hand-drawn image</figcaption></figure>
+                </div>
+            </article>
+
+            <article class="exercise">
+                <h3>3.2 Text-Guided Image Editing</h3>
+                <p>Text prompts steer edits of the Campanile and two personal images.</p>
+                <div class="image-grid">
+                    <figure><img src="./media/3.2/companile_editto_bone.png" alt="Campanile edited toward a bone using seven starting times"><figcaption>Campanile → “a photograph of a bone”</figcaption></figure>
+                    <figure><img src="./media/3.2/cat_to_goat.png" alt="Cat edited toward a goat using seven starting times"><figcaption>Cat → “a photograph of a goat”</figcaption></figure>
+                    <figure><img src="./media/3.2/abstract_drawing_subway_to_subway.png" alt="Abstract drawing edited toward a subway using seven starting times"><figcaption>Drawing → “a photograph in a subway”</figcaption></figure>
+                </div>
+            </article>
+
+            <article class="exercise">
+                <h3>3.3 Visual Anagrams</h3>
+                <p>Each image is generated with a velocity field that averages two prompts under a 180° rotation.</p>
+                <div class="image-grid">
+                    <figure><img src="./media/3.3/oldman.png" alt="Visual anagram of an old man and people around a campfire"><figcaption>“An oil painting of an old man” ↔ “people around a campfire”</figcaption></figure>
+                    <figure><img src="./media/3.3/horse.png" alt="Visual anagram of a snowy mountain village and a horse"><figcaption>“A snowy mountain village” ↔ “a horse”</figcaption></figure>
+                </div>
+            </article>
+
+            <article class="exercise">
+                <h3>3.4 Hybrid Images</h3>
+                <p>Low-frequency structure follows the distant prompt; high-frequency details follow the close-up prompt.</p>
+                <div class="hybrid-grid">
+                    <figure>
+                        <img src="./media/3.4/waterfall.png" alt="Hybrid image combining a distant skull with a close-up waterfall">
+                        <figcaption>Full size · distant: “a lithograph of a skull” · close: “a lithograph of a waterfall”</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./media/3.4/forest.png" alt="Hybrid image combining a distant cat with a close-up forest">
+                        <figcaption>Full size · distant: “a lithograph of a cat” · close: “a lithograph of a forest”</figcaption>
+                    </figure>
+                    <figure class="small-view">
+                        <img src="./media/3.4/waterfall.png" alt="Reduced-size view of the skull and waterfall hybrid">
+                        <figcaption>Reduced-size view · skull / waterfall</figcaption>
+                    </figure>
+                    <figure class="small-view">
+                        <img src="./media/3.4/forest.png" alt="Reduced-size view of the cat and forest hybrid">
+                        <figcaption>Reduced-size view · cat / forest</figcaption>
+                    </figure>
+                </div>
+            </article>
+        </section>
+    </main>
 
     <div class="footer">
-        © 2026 Henry Xue · CS180 Project 0
+        © 2026 Henry Xue · CS180 Project 3
     </div>
 
 </body>
