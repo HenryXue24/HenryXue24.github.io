@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Henry Xue · CS180 </title>
+    <style>
+        /* 全局重置与基础 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* 头部 */
+        .header {
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #475569;
+            margin-top: 0.3rem;
+        }
+
+        /* 项目网格 */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.5rem 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            border: 1px solid #e9edf2;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.08);
+            border-color: #cbd5e1;
+        }
+
+        .project-card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-card .subtitle {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .project-card .tag {
+            display: inline-block;
+            background: #eef2f6;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #475569;
+            margin-top: 0.8rem;
+        }
+
+        /* 页脚 */
+        .footer {
+            margin-top: 3.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        /* 小屏优化 */
+        @media (max-width: 500px) {
+            body { padding: 1.5rem 1rem; }
+            .header h1 { font-size: 1.8rem; }
+            .projects { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1> Henry Xue</h1>
+        <p>CS180 Intro to Computer Vision and Computational Photography</p>
+    </div>
+
+    <!-- 项目列表 -->
+    <div class="projects">
+
+        <!-- Part A -->
+        <a href="./3/PartA/index.html" class="project-card">
+            <h2>Part A</h2>
+            <div class="subtitle">Exploring the Power of Flow Models</div>
+            <p>Visualizing Training and Sampling, Conditional Generation and Guidance, and Creative Applications.</p>
+            <span class="tag">#velocity predictions #Euler sampling #classifier-free guidance</span>
+        </a>
+
+
+        <!-- Part B -->
+        <a href="./3/PartB/index.html" class="project-card">
+            <h2>Part B</h2>
+            <div class="subtitle">Flow Matching from Scratch </div>
+            <p>Start with single-step denoising, then train time-conditioned and class-conditioned flow-matching models and sample new images.</p>
+            <span class="tag">#UNet #MNIST</span>
+        </a>
+
+        </a>
+
+
+        <!-- 添加更多项目卡片 -->
+    </div>
+
+    <div class="footer">
+        © 2026 Henry Xue · 基于 GitHub Pages 构建
+    </div>
+
+</body>
+</html>
