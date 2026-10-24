@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 1 · sthsthsth</title>
+    <title>Project 4 Part A</title>
     <style>
         /* ====== 全局样式（与主页保持一致） ====== */
         * {
@@ -75,7 +75,7 @@
             margin-bottom: 1.2rem;
             background: #f1f5f9;
             padding: 0.8rem 1.2rem;
-            border-radius: 10px;
+            border-radius: 8px;
             border-left: 4px solid #94a3b8;
         }
 
@@ -83,32 +83,26 @@
         .image-grid {
             display: grid;
             gap: 1.2rem;
-            /* 自动适应列数：每列最小 200px，最大等分剩余空间 */
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         }
 
         /* 图片卡片 */
         .image-grid figure {
             background: #ffffff;
-            border-radius: 14px;
+            border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06);
             border: 1px solid #e9edf2;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
             margin: 0;
-        }
-        .image-grid figure:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px -10px rgba(0,0,0,0.12);
         }
 
         .image-grid img {
             display: block;
             width: 100%;
             height: auto;
-            aspect-ratio: 16 / 10; /* 统一图片比例，更整齐 */
-            object-fit: cover;
-            background: #eef2f6; /* 图片加载时的占位色 */
+            max-height: 650px;
+            object-fit: contain;
+            background: #eef2f6;
         }
 
         .image-grid figcaption {
@@ -119,6 +113,64 @@
             text-align: center;
             background: #fafcfd;
             border-top: 1px solid #f1f5f9;
+        }
+
+        .section-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem 1.4rem;
+            margin: -1rem 0 3rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-nav a {
+            color: #315d66;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .section-nav a:hover {
+            color: #9a4938;
+            text-decoration: underline;
+        }
+        .exercise {
+            margin: 2rem 0 2.5rem;
+        }
+        .exercise h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #263c42;
+            margin-bottom: 0.65rem;
+        }
+        .exercise p {
+            margin-bottom: 1rem;
+            color: #475569;
+        }
+        .matrix {
+            overflow-x: auto;
+            margin: 0 0 1.2rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #fff;
+            color: #263c42;
+            font: 0.9rem/1.6 Consolas, monospace;
+        }
+        .point-table {
+            width: 100%;
+            margin: 0 0 1.2rem;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 0.9rem;
+        }
+        .point-table th,
+        .point-table td {
+            padding: 0.55rem 0.7rem;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .point-table th {
+            background: #f1f5f9;
+            color: #263c42;
         }
 
         /* ====== 页脚 ====== */
@@ -150,58 +202,134 @@
 
     <!-- 导航：返回主页 -->
     <div class="nav-back">
-        <a href="../index.html">← return</a>
+        <a href="../index.html">← Project 4</a>
     </div>
 
-    <!-- heading -->
     <header class="project-header">
-        <h1>📷 Project 0: Becoming Friends with Your Camera FA26</h1>
-        <p>distort,Perspective Compression and Dolly Zoom</p>
+        <h1>Project 4A | Image Warping and Mosaicing</h1>
+        <p>Recovering homographies, inverse-warping photographs, and blending image mosaics.</p>
     </header>
 
-    <section class="section">
-        <h2>Part 1</h2>
-        <div class="desc">
-            Selfie: The Wrong Way <strong>vs.</strong> The Right Way 
-        </div>
-        <div class="image-grid">
-            <figure>
-                <img src="./media/img1.png" alt="selfies">
-                <figcaption>comparison of selfie from different distance</figcaption>
-            </figure>
-        </div>
-    </section>
+    <nav class="section-nav" aria-label="Project sections">
+        <a href="#part-a1">A.1 Photograph Sets</a>
+        <a href="#part-a2">A.2 Homographies</a>
+        <a href="#part-a3">A.3 Image Warping</a>
+        <a href="#part-a4">A.4 Mosaics</a>
+    </nav>
 
-    <section class="section">
-        <h2>Part 2</h2>
-        <div class="desc">
-            sthsthsth
-        </div>
-        <div class="image-grid">
-            <figure>
-                <img src="./media/img3.jpg" alt="sthsthsth">
-                <figcaption>bulabulabula</figcaption>
-            </figure>
+    <main>
+        <section class="section" id="part-a1">
+            <h2>A.1 Photograph Sets</h2>
+            <p class="desc">Two overlapping photo sets were captured for alignment: a two-image classroom view and a three-image hillside panorama.</p>
 
-        </div>
-    </section>
+            <article class="exercise">
+                <h3>Classroom</h3>
+                <div class="image-grid">
+                    <figure><img src="./media/A1/classroom1.jpg" alt="First classroom photograph"><figcaption>Classroom · image 1</figcaption></figure>
+                    <figure><img src="./media/A1/classroom2.jpg" alt="Second classroom photograph with an overlapping view"><figcaption>Classroom · image 2</figcaption></figure>
+                </div>
+            </article>
 
-    <section class="section">
-        <h2>Part 3</h2>
-        <div class="desc">
-            sthsthsth
-        </div>
-        <div class="image-grid">
-            <figure>
-                <img src="./media/img6.jpg" alt="sthsthsth">
-                <figcaption>bulabulabula</figcaption>
-            </figure>
+            <article class="exercise">
+                <h3>Hillside</h3>
+                <div class="image-grid">
+                    <figure><img src="./media/A1/hill1.jpg" alt="First hillside photograph"><figcaption>Hillside · image 1</figcaption></figure>
+                    <figure><img src="./media/A1/hill2.jpg" alt="Second hillside photograph"><figcaption>Hillside · image 2</figcaption></figure>
+                    <figure><img src="./media/A1/hill3.jpg" alt="Third hillside photograph"><figcaption>Hillside · image 3</figcaption></figure>
+                </div>
+            </article>
+        </section>
 
-        </div>
-    </section>
+        <section class="section" id="part-a2">
+            <h2>A.2 Recovering Homographies</h2>
+            <p class="desc">Four manually selected correspondences form an overdetermined linear system. The notebook solves Ah = b with <code>numpy.linalg.lstsq</code>, fixing H<sub>33</sub> = 1.</p>
+
+            <article class="exercise">
+                <h3>Classroom correspondences</h3>
+                <p>Coordinates are listed in the same order in each image; image 1 points map to image 2 points.</p>
+                <table class="point-table">
+                    <thead><tr><th>Point</th><th>Image 1 (x, y)</th><th>Image 2 (x, y)</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>(108.06, 117.94)</td><td>(918.45, 210.41)</td></tr>
+                        <tr><td>2</td><td>(775.08, 80.54)</td><td>(1575.08, 35.86)</td></tr>
+                        <tr><td>3</td><td>(779.23, 538.72)</td><td>(1568.84, 555.34)</td></tr>
+                        <tr><td>4</td><td>(121.57, 543.92)</td><td>(918.45, 573.01)</td></tr>
+                    </tbody>
+                </table>
+                <pre class="matrix">H (classroom image 1 → image 2)
+[[ 3.789153e-01, -2.827837e-02,  8.445195e+02],
+ [-2.185340e-01,  8.143381e-01,  1.296595e+02],
+ [-3.590613e-04, -6.323114e-06,  1.000000e+00]]</pre>
+            </article>
+
+            <article class="exercise">
+                <h3>Hillside correspondences</h3>
+                <p>The notebook maps image 2 into image 1's coordinate frame and uses image 1 as the reference for the three-image mosaic.</p>
+                <table class="point-table">
+                    <thead><tr><th>Point</th><th>Image 2 (x, y)</th><th>Image 1 (x, y)</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>(817.68, 621.84)</td><td>(37.42, 693.53)</td></tr>
+                        <tr><td>2</td><td>(1042.09, 515.86)</td><td>(320.01, 565.73)</td></tr>
+                        <tr><td>3</td><td>(1017.16, 742.36)</td><td>(296.12, 819.24)</td></tr>
+                        <tr><td>4</td><td>(836.38, 979.24)</td><td>(43.65, 1144.44)</td></tr>
+                    </tbody>
+                </table>
+                <pre class="matrix">H (hillside image 2 → image 1)
+[[ 1.120471e+00, -5.548514e-02, -8.492859e+02],
+ [-2.480798e-02,  7.800792e-01,  1.356248e+02],
+ [ 4.595881e-05, -2.763195e-04,  1.000000e+00]]</pre>
+            </article>
+        </section>
+
+        <section class="section" id="part-a3">
+            <h2>A.3 Image Warping</h2>
+            <p class="desc">Both interpolation methods use inverse mapping. Nearest neighbor samples the closest pixel; bilinear interpolation blends the four surrounding pixels and produces smoother results.</p>
+
+            <article class="exercise">
+                <h3>Classroom · two-image alignment</h3>
+                <div class="image-grid">
+                    <figure><img src="./media/A3/classroom/canvasNe.png" alt="Classroom images aligned on a canvas using nearest-neighbor interpolation"><figcaption>Nearest-neighbor canvas</figcaption></figure>
+                    <figure><img src="./media/A3/classroom/canvasBi.png" alt="Classroom images aligned on a canvas using bilinear interpolation"><figcaption>Bilinear canvas</figcaption></figure>
+                    <figure><img src="./media/A3/classroom/warped_im1.png" alt="First classroom image placed on the output canvas"><figcaption>Reference image · warped image 1</figcaption></figure>
+                    <figure><img src="./media/A3/classroom/warped_im2.png" alt="Second classroom image warped into the reference frame"><figcaption>Aligned image · warped image 2</figcaption></figure>
+                </div>
+            </article>
+
+            <article class="exercise">
+                <h3>Hillside · three-image alignment</h3>
+                <div class="image-grid">
+                    <figure><img src="./media/A3/hill/canvasNe.png" alt="Three hillside images aligned using nearest-neighbor interpolation"><figcaption>Nearest-neighbor canvas</figcaption></figure>
+                    <figure><img src="./media/A3/hill/canvasBi.png" alt="Three hillside images aligned using bilinear interpolation"><figcaption>Bilinear canvas</figcaption></figure>
+                    <figure><img src="./media/A3/hill/canvas.png" alt="Hillside warped image canvas output"><figcaption>Notebook canvas output</figcaption></figure>
+                    <figure><img src="./media/A3/hill/warped_im1.png" alt="First hillside image in the reference canvas"><figcaption>Reference image · warped image 1</figcaption></figure>
+                    <figure><img src="./media/A3/hill/warped_im2.png" alt="Second hillside image warped into the reference frame"><figcaption>Aligned image · warped image 2</figcaption></figure>
+                    <figure><img src="./media/A3/hill/warped_im3.png" alt="Third hillside image warped into the reference frame"><figcaption>Aligned image · warped image 3</figcaption></figure>
+                </div>
+            </article>
+        </section>
+
+        <section class="section" id="part-a4">
+            <h2>A.4 Blending the Images into Mosaics</h2>
+            <p class="desc">The images are warped into a shared canvas and blended with spatial weights that decrease toward image edges. The classroom notebook additionally blends low- and high-frequency components.</p>
+
+            <article class="exercise">
+                <h3>Classroom mosaic</h3>
+                <div class="image-grid">
+                    <figure><img src="./media/A4/classroom/mosaic.png" alt="Weighted blend of two classroom photographs into a panorama"><figcaption>Two-image classroom mosaic · weighted frequency blend</figcaption></figure>
+                </div>
+            </article>
+
+            <article class="exercise">
+                <h3>Hillside mosaic</h3>
+                <div class="image-grid">
+                    <figure><img src="./media/A4/hill/mosaic.png" alt="Weighted blend of three hillside photographs into a panorama"><figcaption>Three-image hillside mosaic · weighted average</figcaption></figure>
+                </div>
+            </article>
+        </section>
+    </main>
 
     <div class="footer">
-        © 2026 Henry Xue · CS180 Project 0
+        © 2026 Henry Xue · CS180 Project 4A
     </div>
 
 </body>
