@@ -251,6 +251,10 @@
 
             <article class="exercise">
                 <h3>Classroom correspondences</h3>
+                <p>Selected points are marked in matching order across the two classroom photographs.</p>
+                <div class="image-grid">
+                    <figure><img src="../PartA/media/A2/points_classroom.png" alt="Manually selected correspondence points marked on both classroom photographs" loading="lazy" decoding="async"><figcaption>Classroom · selected correspondence points</figcaption></figure>
+                </div>
                 <p>Coordinates are listed in the same order in each image; image 1 points map to image 2 points.</p>
                 <table class="point-table">
                     <thead><tr><th>Point</th><th>Image 1 (x, y)</th><th>Image 2 (x, y)</th></tr></thead>
@@ -270,6 +274,9 @@
             <article class="exercise">
                 <h3>Hillside correspondences</h3>
                 <p>The notebook maps image 2 into image 1's coordinate frame and uses image 1 as the reference for the three-image mosaic.</p>
+                <div class="image-grid">
+                    <figure><img src="../PartA/media/A2/points_hill.png" alt="Manually selected correspondence points marked on the three hillside photographs" loading="lazy" decoding="async"><figcaption>Hillside · selected correspondence points</figcaption></figure>
+                </div>
                 <table class="point-table">
                     <thead><tr><th>Point</th><th>Image 2 (x, y)</th><th>Image 1 (x, y)</th></tr></thead>
                     <tbody>
@@ -295,7 +302,7 @@
                 <h3>Rectification · classroom screen</h3>
                 <p>The four corners of the projection screen are mapped to a rectangular output. The source view with selected corners and the nearest-neighbor and bilinear results are shown together.</p>
                 <div class="image-grid">
-                    <figure><img src="../PartA/media/A3/classroom/rectification.png" alt="Classroom screen rectification showing selected corners and nearest-neighbor and bilinear results"><figcaption>Classroom screen · selected corners and interpolation comparison</figcaption></figure>
+                    <figure><img src="./media/A3/classroom/rectification.png" alt="Classroom screen rectification showing selected corners and nearest-neighbor and bilinear results"><figcaption>Classroom screen · selected corners and interpolation comparison</figcaption></figure>
                 </div>
             </article>
 
@@ -303,7 +310,7 @@
                 <h3>Rectification · street facade</h3>
                 <p>The corners of the orange building facade are mapped to a rectangular output. Two street views illustrate how the same planar surface is rectified from different perspectives.</p>
                 <div class="image-grid">
-                    <figure><img src="../PartA/media/A3/resctification_of_street.png" alt="Street facade rectification showing selected corners and nearest-neighbor and bilinear results"><figcaption>Street facade · selected corners and interpolation comparison</figcaption></figure>
+                    <figure><img src="./media/A3/resctification_of_street.png" alt="Street facade rectification showing selected corners and nearest-neighbor and bilinear results"><figcaption>Street facade · selected corners and interpolation comparison</figcaption></figure>
                 </div>
             </article>
 
@@ -312,6 +319,7 @@
                 <div class="image-grid">
                     <figure><img src="./media/A3/classroom/canvasNe.png" alt="Classroom images aligned on a canvas using nearest-neighbor interpolation"><figcaption>Nearest-neighbor canvas</figcaption></figure>
                     <figure><img src="./media/A3/classroom/canvasBi.png" alt="Classroom images aligned on a canvas using bilinear interpolation"><figcaption>Bilinear canvas</figcaption></figure>
+                    <figure><img src="../PartA/media/A3/classroom/canvas.png" alt="Updated classroom nearest-neighbor warp output on the shared canvas"><figcaption>Updated canvas · nearest neighbor</figcaption></figure>
                     <figure><img src="./media/A3/classroom/warped_im1.png" alt="First classroom image placed on the output canvas"><figcaption>Reference image · warped image 1</figcaption></figure>
                     <figure><img src="./media/A3/classroom/warped_im2.png" alt="Second classroom image warped into the reference frame"><figcaption>Aligned image · warped image 2</figcaption></figure>
                 </div>
@@ -322,7 +330,7 @@
                 <div class="image-grid">
                     <figure><img src="./media/A3/hill/canvasNe.png" alt="Three hillside images aligned using nearest-neighbor interpolation"><figcaption>Nearest-neighbor canvas</figcaption></figure>
                     <figure><img src="./media/A3/hill/canvasBi.png" alt="Three hillside images aligned using bilinear interpolation"><figcaption>Bilinear canvas</figcaption></figure>
-                    <figure><img src="./media/A3/hill/canvas.png" alt="Hillside warped image canvas output"><figcaption>Notebook canvas output</figcaption></figure>
+                    <figure><img src="./media/A3/hill/canvas.png" alt="Updated hillside bilinear warp output on the shared canvas"><figcaption>Updated canvas · bilinear</figcaption></figure>
                     </div><div class="image-grid">
                     <figure><img src="./media/A3/hill/warped_im1.png" alt="First hillside image in the reference canvas"><figcaption>Reference image · warped image 1</figcaption></figure>
                     <figure><img src="./media/A3/hill/warped_im2.png" alt="Second hillside image warped into the reference frame"><figcaption>Aligned image · warped image 2</figcaption></figure>
