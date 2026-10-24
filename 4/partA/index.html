@@ -221,6 +221,7 @@
         <section class="section" id="part-a1">
             <h2>A.1 Photograph Sets</h2>
             <p class="desc">Two overlapping photo sets were captured for alignment: a two-image classroom view and a three-image hillside panorama.</p>
+            <p>For both sets, the camera's center of projection was kept fixed while the camera was rotated between shots. This makes the views related by projective transformations and preserves overlap for matching scene points.</p>
 
             <article class="exercise">
                 <h3>Classroom</h3>
@@ -237,12 +238,17 @@
                     <figure><img src="./media/A1/hill2.jpg" alt="Second hillside photograph"><figcaption>Hillside · image 2</figcaption></figure>
                     <figure><img src="./media/A1/hill3.jpg" alt="Third hillside photograph"><figcaption>Hillside · image 3</figcaption></figure>
                 </div>
+                    <p>Features visible in more than one photograph provide candidate correspondences. Matching the same scene locations across overlapping views supplies the point pairs used to estimate the projective transforms.</p>
             </article>
         </section>
 
         <section class="section" id="part-a2">
             <h2>A.2 Recovering Homographies</h2>
-            <p class="desc">Four manually selected correspondences form an overdetermined linear system. The notebook solves Ah = b with <code>numpy.linalg.lstsq</code>, fixing H<sub>33</sub> = 1.</p>
+            <p class="desc">The notebook estimates a homography from manually selected point pairs with <code>numpy.linalg.lstsq</code>, fixing H<sub>33</sub> = 1. Each pair contributes two linear equations.</p>
+            <p>For a point (x, y) in image 1 that matches (u, v) in image 2, let h = [h<sub>11</sub>, h<sub>12</sub>, h<sub>13</sub>, h<sub>21</sub>, h<sub>22</sub>, h<sub>23</sub>, h<sub>31</sub>, h<sub>32</sub>]<sup>T</sup>. The correspondence contributes these rows to Ah = b:</p>
+            <pre class="matrix">[x, y, 1, 0, 0, 0, -ux, -uy] h = u
+[0, 0, 0, x, y, 1, -vx, -vy] h = v</pre>
+            <p>The current examples use four point pairs each, giving eight equations for eight unknowns. This is the minimum determined case, not an overdetermined fit; using more than four well-spread correspondences would make the estimate less sensitive to clicking error.</p>
 
             <article class="exercise">
                 <h3>Classroom correspondences</h3>
@@ -283,7 +289,8 @@
 
         <section class="section" id="part-a3">
             <h2>A.3 Image Warping</h2>
-            <p class="desc">Both interpolation methods use inverse mapping. Nearest neighbor samples the closest pixel; bilinear interpolation blends the four surrounding pixels and produces smoother results.</p>
+            <p class="desc">Inverse warping visits each output-canvas pixel and maps it back into the source image, avoiding the gaps that can occur when forward-mapping source pixels.</p>
+            <p>Nearest-neighbor interpolation rounds to the closest source pixel. It is simple and fast, but can look blocky along transformed edges. Bilinear interpolation computes a weighted average of the four surrounding pixels, producing smoother results at the cost of additional sampling work and some edge softening.</p>
 
             <article class="exercise">
                 <h3>Classroom · two-image alignment</h3>
@@ -311,7 +318,8 @@
 
         <section class="section" id="part-a4">
             <h2>A.4 Blending the Images into Mosaics</h2>
-            <p class="desc">The images are warped into a shared canvas and blended with spatial weights that decrease toward image edges. The classroom notebook additionally blends low- and high-frequency components.</p>
+            <p class="desc">Each view is warped into a shared canvas. Spatial weights favor pixels farther from image boundaries, and the weighted values are normalized by their total weight to combine overlapping regions.</p>
+            <p>The classroom mosaic separates low- and high-frequency image content before blending the two layers, which helps reduce visible seams while retaining detail. The hillside and street mosaics use a weighted average. The street canvas is shown before blending alongside the final result.</p>
 
             <article class="exercise">
                 <h3>Classroom mosaic</h3>
