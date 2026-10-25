@@ -244,7 +244,7 @@
 
         <section class="section" id="part-a2">
             <h2>A.2 Recovering Homographies</h2>
-            <p class="desc">The notebook estimates a homography from manually selected point pairs with <code>numpy.linalg.lstsq</code>, fixing H<sub>33</sub> = 1. Each pair contributes two linear equations.</p>
+            <p class="desc">The notebook estimates each homography from eight manually selected point pairs with <code>numpy.linalg.lstsq</code>, fixing H<sub>33</sub> = 1. Each pair contributes two equations, giving an overdetermined system of 16 equations for 8 unknowns.</p>
             <p>For a point (x, y) in image 1 that matches (u, v) in image 2, let h = [h<sub>11</sub>, h<sub>12</sub>, h<sub>13</sub>, h<sub>21</sub>, h<sub>22</sub>, h<sub>23</sub>, h<sub>31</sub>, h<sub>32</sub>]<sup>T</sup>. The correspondence contributes these rows to Ah = b:</p>
             <pre class="matrix">[x, y, 1, 0, 0, 0, -ux, -uy] h = u
 [0, 0, 0, x, y, 1, -vx, -vy] h = v</pre>
@@ -255,41 +255,54 @@
                 <div class="image-grid">
                     <figure><img src="./media/A2/points_classroom.png" alt="Manually selected correspondence points marked on both classroom photographs" loading="lazy" decoding="async"><figcaption>Classroom · selected correspondence points</figcaption></figure>
                 </div>
-                <p>Coordinates are listed in the same order in each image; image 1 points map to image 2 points.</p>
+                <p>Coordinates are listed in matching order; image 1 points map to image 2 points.</p>
                 <table class="point-table">
                     <thead><tr><th>Point</th><th>Image 1 (x, y)</th><th>Image 2 (x, y)</th></tr></thead>
                     <tbody>
-                        <tr><td>1</td><td>(108.06, 117.94)</td><td>(918.45, 210.41)</td></tr>
-                        <tr><td>2</td><td>(775.08, 80.54)</td><td>(1575.08, 35.86)</td></tr>
-                        <tr><td>3</td><td>(779.23, 538.72)</td><td>(1568.84, 555.34)</td></tr>
-                        <tr><td>4</td><td>(121.57, 543.92)</td><td>(918.45, 573.01)</td></tr>
+                        <tr><td>1</td><td>(109.10, 120.02)</td><td>(917.42, 209.37)</td></tr>
+                        <tr><td>2</td><td>(776.12, 76.38)</td><td>(1571.96, 36.90)</td></tr>
+                        <tr><td>3</td><td>(121.57, 541.84)</td><td>(919.49, 573.01)</td></tr>
+                        <tr><td>4</td><td>(780.27, 539.76)</td><td>(1569.88, 556.38)</td></tr>
+                        <tr><td>5</td><td>(154.82, 597.94)</td><td>(971.44, 616.64)</td></tr>
+                        <tr><td>6</td><td>(776.12, 600.02)</td><td>(1565.73, 616.64)</td></tr>
+                        <tr><td>7</td><td>(107.03, 552.23)</td><td>(911.18, 579.24)</td></tr>
+                        <tr><td>8</td><td>(794.82, 552.23)</td><td>(1588.58, 573.01)</td></tr>
                     </tbody>
                 </table>
                 <pre class="matrix">H (classroom image 1 → image 2)
-[[ 3.789153e-01, -2.827837e-02,  8.445195e+02],
- [-2.185340e-01,  8.143381e-01,  1.296595e+02],
- [-3.590613e-04, -6.323114e-06,  1.000000e+00]]</pre>
+[[ 4.322561e-01,  3.589867e-02,  8.344109e+02],
+ [-2.040678e-01,  8.477917e-01,  1.223779e+02],
+ [-3.299286e-04,  2.874957e-05,  1.000000e+00]]</pre>
             </article>
 
             <article class="exercise">
                 <h3>Hillside correspondences</h3>
-                <p>The notebook maps image 2 into image 1's coordinate frame and uses image 1 as the reference for the three-image mosaic.</p>
+                <p>Eight matching locations are listed across the three hillside views. The notebook maps images 2 and 3 into image 1's coordinate frame for the mosaic.</p>
                 <div class="image-grid">
                     <figure><img src="./media/A2/points_hill.png" alt="Manually selected correspondence points marked on the three hillside photographs" loading="lazy" decoding="async"><figcaption>Hillside · selected correspondence points</figcaption></figure>
                 </div>
                 <table class="point-table">
-                    <thead><tr><th>Point</th><th>Image 2 (x, y)</th><th>Image 1 (x, y)</th></tr></thead>
+                    <thead><tr><th>Point</th><th>Image 1 (x, y)</th><th>Image 2 (x, y)</th><th>Image 3 (x, y)</th></tr></thead>
                     <tbody>
-                        <tr><td>1</td><td>(817.68, 621.84)</td><td>(37.42, 693.53)</td></tr>
-                        <tr><td>2</td><td>(1042.09, 515.86)</td><td>(320.01, 565.73)</td></tr>
-                        <tr><td>3</td><td>(1017.16, 742.36)</td><td>(296.12, 819.24)</td></tr>
-                        <tr><td>4</td><td>(836.38, 979.24)</td><td>(43.65, 1144.44)</td></tr>
+                        <tr><td>1</td><td>(1042.09, 513.79)</td><td>(322.09, 566.77)</td><td>(1642.61, 475.34)</td></tr>
+                        <tr><td>2</td><td>(908.06, 513.79)</td><td>(155.86, 570.93)</td><td>(1465.99, 482.62)</td></tr>
+                        <tr><td>3</td><td>(866.51, 610.41)</td><td>(104.95, 681.06)</td><td>(1413.00, 587.55)</td></tr>
+                        <tr><td>4</td><td>(816.64, 621.84)</td><td>(37.42, 696.64)</td><td>(1352.74, 603.14)</td></tr>
+                        <tr><td>5</td><td>(1084.69, 639.50)</td><td>(376.12, 698.72)</td><td>(1696.64, 628.07)</td></tr>
+                        <tr><td>6</td><td>(953.78, 733.01)</td><td>(215.08, 816.12)</td><td>(1526.25, 729.89)</td></tr>
+                        <tr><td>7</td><td>(1018.19, 743.40)</td><td>(293.00, 820.28)</td><td>(1611.44, 742.36)</td></tr>
+                        <tr><td>8</td><td>(836.38, 980.28)</td><td>(44.69, 1141.32)</td><td>(1394.30, 986.51)</td></tr>
                     </tbody>
                 </table>
                 <pre class="matrix">H (hillside image 2 → image 1)
-[[ 1.120471e+00, -5.548514e-02, -8.492859e+02],
- [-2.480798e-02,  7.800792e-01,  1.356248e+02],
- [ 4.595881e-05, -2.763195e-04,  1.000000e+00]]</pre>
+[[ 7.048288e-01,  1.997422e-01,  7.597711e+02],
+ [-5.975451e-02,  1.106988e+00, -6.522590e+01],
+ [-1.775039e-04,  1.993599e-04,  1.000000e+00]]
+
+H (hillside image 3 → image 1)
+[[ 8.160926e-01, -1.715032e-01, -2.046218e+02],
+ [ 2.726272e-02,  7.520047e-01,  1.149418e+02],
+ [ 5.489095e-05, -1.663282e-04,  1.000000e+00]]</pre>
             </article>
         </section>
 
@@ -319,7 +332,7 @@
                 <div class="image-grid">
                     <figure><img src="./media/A3/classroom/canvasNe.png" alt="Classroom images aligned on a canvas using nearest-neighbor interpolation"><figcaption>Nearest-neighbor canvas</figcaption></figure>
                     <figure><img src="./media/A3/classroom/canvasBi.png" alt="Classroom images aligned on a canvas using bilinear interpolation"><figcaption>Bilinear canvas</figcaption></figure>
-                    <figure><img src="../PartA/media/A3/classroom/canvas.png" alt="Updated classroom nearest-neighbor warp output on the shared canvas"><figcaption>Updated canvas · nearest neighbor</figcaption></figure>
+                    <figure><img src="./media/A3/classroom/canvas.png" alt="Updated classroom nearest-neighbor warp output on the shared canvas"><figcaption>Updated canvas · nearest neighbor</figcaption></figure>
                     <figure><img src="./media/A3/classroom/warped_im1.png" alt="First classroom image placed on the output canvas"><figcaption>Reference image · warped image 1</figcaption></figure>
                     <figure><img src="./media/A3/classroom/warped_im2.png" alt="Second classroom image warped into the reference frame"><figcaption>Aligned image · warped image 2</figcaption></figure>
                 </div>
