@@ -235,31 +235,61 @@
         <section class="section" id="part-b4">
             <h2>B.4 RANSAC for Robust Homography</h2>
             <p class="desc">Four correspondence pairs are randomly sampled to estimate a homography. Inliers are counted using reprojection error, and the transform is re-estimated from the inlier set before mapping the images onto a shared canvas.</p>
-            <p>RANSAC classified 178 of the 192 matches as inliers. The inlier selection is shown first, followed by a manual and automatic stitching comparison for the same street scene.</p>
+            <p>RANSAC was applied to three overlapping image pairs: the street scene, classroom, and hillside. The figures below show the inlier matches for each pair and the resulting automatic mosaics.</p>
             <article class="exercise">
-                <h3>RANSAC inlier selection</h3>
+                <h3>RANSAC correspondence filtering</h3>
                 <div class="image-grid">
                     <figure>
                         <img src="./media/4/match_of_points.png" alt="RANSAC inlier and outlier correspondence lines between two street images" loading="lazy" decoding="async">
-                        <figcaption>RANSAC · 178 inliers from 192 feature matches</figcaption>
+                        <figcaption>Street · 178 inliers from 192 matches</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./media/4/other/classroom_matchofpoints.png" alt="RANSAC inlier and outlier matches between overlapping classroom images" loading="lazy" decoding="async">
+                        <figcaption>Classroom · 32 inliers from 139 matches</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./media/4/other/hill_matchofpoints.png" alt="RANSAC inlier and outlier matches between overlapping hillside images" loading="lazy" decoding="async">
+                        <figcaption>Hillside · 37 inliers from 80 matches</figcaption>
                     </figure>
                 </div>
             </article>
             <article class="exercise">
-                <h3>Manual vs. automatic panorama</h3>
-                <p>The manual result uses correspondences selected by hand. The automatic result estimates the transform from descriptor matches using four-point RANSAC.</p>
+                <h3>Automatic mosaics</h3>
+                <div class="image-grid">
+                    <figure>
+                        <img src="./media/4/auto.png" alt="Automatically stitched neighborhood street panorama" loading="lazy" decoding="async">
+                        <figcaption>Street panorama · RANSAC homography</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./media/4/other/classroom_auto.png" alt="Automatically stitched classroom panorama" loading="lazy" decoding="async">
+                        <figcaption>Classroom panorama · RANSAC homography</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./media/4/other/hill_auto.png" alt="Automatically stitched hillside panorama" loading="lazy" decoding="async">
+                        <figcaption>Hillside panorama · RANSAC homography</figcaption>
+                    </figure>
+                </div>
+            </article>
+            <article class="exercise">
+                <h3>Manual vs. automatic stitching</h3>
+                <p>The manual mosaic uses correspondences selected by hand. The automatic result uses descriptor matches and a four-point RANSAC homography.</p>
                 <div class="image-grid">
                     <figure>
                         <img src="./media/4/hand.png" alt="Manually aligned street image mosaic" loading="lazy" decoding="async">
                         <figcaption>Manual alignment</figcaption>
                     </figure>
                     <figure>
-                        <img src="./media/4/auto.png" alt="Automatically stitched color street panorama" loading="lazy" decoding="async">
+                        <img src="./media/4/auto.png" alt="Automatically stitched neighborhood street panorama" loading="lazy" decoding="async">
                         <figcaption>Automatic alignment · RANSAC homography</figcaption>
                     </figure>
                 </div>
             </article>
-            <p>The current Part B media folder contains one automatic panorama. The required set of at least three automatic mosaics is not yet included in the available assets.</p>
+        </section>
+
+        <section class="section" id="part-b5">
+            <h2>B.5 Bells &amp; Whistles</h2>
+            <p class="desc">For CS180, the listed extensions are optional. Options include multiscale processing, rotation-invariant descriptors, and panorama recognition.</p>
+            <p>No extension results are included in the current Part B media, so this page does not claim an extension as completed. See <a href="../PartA/index.html">Project 4A</a> for additional manual homographies, image warping, and mosaics.</p>
         </section>
 
     </main>
