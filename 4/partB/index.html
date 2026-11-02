@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 4 Part B</title>
     <style>
-        /* ====== 全局样式（与主页保持一致） ====== */
+        /* ====== Global styles (consistent with the homepage) ====== */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +22,7 @@
             margin: 0 auto;
         }
 
-        /* ====== 导航返回 ====== */
+        /* ====== Back navigation ====== */
         .nav-back {
             margin-bottom: 2rem;
         }
@@ -41,7 +41,7 @@
             border-bottom-color: #94a3b8;
         }
 
-        /* ====== 页面头部 ====== */
+        /* ====== Page header ====== */
         .project-header {
             margin-bottom: 3rem;
             border-bottom: 2px solid #e2e8f0;
@@ -59,7 +59,7 @@
             margin-top: 0.2rem;
         }
 
-        /* ====== 每个展示区块 ====== */
+        /* ====== Content sections ====== */
         .section {
             margin-bottom: 3.5rem;
         }
@@ -75,40 +75,33 @@
             margin-bottom: 1.2rem;
             background: #f1f5f9;
             padding: 0.8rem 1.2rem;
-            border-radius: 10px;
+            border-radius: 8px;
             border-left: 4px solid #94a3b8;
         }
 
-        /* ====== 图片网格（核心：横向排布） ====== */
+        /* ====== Image grid ====== */
         .image-grid {
             display: grid;
             gap: 1.2rem;
-            /* 自动适应列数：每列最小 200px，最大等分剩余空间 */
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         }
 
-        /* 图片卡片 */
         .image-grid figure {
             background: #ffffff;
-            border-radius: 14px;
+            border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06);
             border: 1px solid #e9edf2;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
             margin: 0;
-        }
-        .image-grid figure:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px -10px rgba(0,0,0,0.12);
         }
 
         .image-grid img {
             display: block;
             width: 100%;
             height: auto;
-            aspect-ratio: 16 / 10; /* 统一图片比例，更整齐 */
-            object-fit: cover;
-            background: #eef2f6; /* 图片加载时的占位色 */
+            max-height: 650px;
+            object-fit: contain;
+            background: #eef2f6;
         }
 
         .image-grid figcaption {
@@ -121,7 +114,39 @@
             border-top: 1px solid #f1f5f9;
         }
 
-        /* ====== 页脚 ====== */
+        .section-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem 1.4rem;
+            margin: -1rem 0 3rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-nav a {
+            color: #315d66;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .section-nav a:hover {
+            color: #9a4938;
+            text-decoration: underline;
+        }
+        .exercise {
+            margin: 2rem 0 2.5rem;
+        }
+        .exercise h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #263c42;
+            margin-bottom: 0.65rem;
+        }
+        .exercise p,
+        .section > p:not(.desc) {
+            margin-bottom: 1rem;
+            color: #475569;
+        }
+
+        /* ====== Footer ====== */
         .footer {
             margin-top: 4rem;
             padding-top: 1.5rem;
@@ -131,12 +156,12 @@
             text-align: center;
         }
 
-        /* ====== 移动端适配 ====== */
+        /* ====== Responsive layout ====== */
         @media (max-width: 600px) {
             body { padding: 1.2rem 1rem; }
             .project-header h1 { font-size: 1.6rem; }
             .image-grid {
-                grid-template-columns: 1fr; /* 手机屏幕变为单列 */
+                grid-template-columns: 1fr; /* Use a single column on small screens. */
                 gap: 1rem;
             }
             .section .desc {
@@ -148,60 +173,99 @@
 </head>
 <body>
 
-    <!-- 导航：返回主页 -->
+    <!-- Back navigation -->
     <div class="nav-back">
-        <a href="../index.html">← return</a>
+        <a href="../index.html">← Project 4</a>
     </div>
 
-    <!-- heading -->
     <header class="project-header">
-        <h1>📷 Project 0: Becoming Friends with Your Camera FA26</h1>
-        <p>distort,Perspective Compression and Dolly Zoom</p>
+        <h1>Project 4B | Feature Matching for Autostitching</h1>
+        <p>Harris corners, MOPS-style feature descriptors, descriptor matching, and RANSAC homographies.</p>
     </header>
 
-    <section class="section">
-        <h2>Part 1</h2>
-        <div class="desc">
-            Selfie: The Wrong Way <strong>vs.</strong> The Right Way 
-        </div>
-        <div class="image-grid">
-            <figure>
-                <img src="./media/img1.png" alt="selfies">
-                <figcaption>comparison of selfie from different distance</figcaption>
-            </figure>
-        </div>
-    </section>
+    <nav class="section-nav" aria-label="Project sections">
+        <a href="#part-b1">B.1 Harris &amp; ANMS</a>
+        <a href="#part-b2">B.2 Descriptors</a>
+        <a href="#part-b3">B.3 Matching</a>
+        <a href="#part-b4">B.4 RANSAC &amp; mosaics</a>
+        <a href="#part-b5">B.5 Bells &amp; Whistles</a>
+    </nav>
 
-    <section class="section">
-        <h2>Part 2</h2>
-        <div class="desc">
-            sthsthsth
-        </div>
-        <div class="image-grid">
-            <figure>
-                <img src="./media/img3.jpg" alt="sthsthsth">
-                <figcaption>bulabulabula</figcaption>
-            </figure>
+    <main>
+        <section class="section" id="part-b1">
+            <h2>B.1 Harris Corner Detection &amp; ANMS</h2>
+            <p class="desc">The Harris response produces a dense set of candidate interest points. Adaptive Non-Maximal Suppression (ANMS) retains strong corners that are distributed more evenly across the image.</p>
+            <p>For this street scene, Harris detection found 47,653 candidate points. ANMS selected 500 points based on response strength and distance to nearby stronger corners, reducing clusters and improving coverage for later matching.</p>
+            <div class="image-grid">
+                <figure>
+                    <img src="./media/1/harris.png" alt="Original street image beside the dense set of Harris corners" loading="lazy" decoding="async">
+                    <figcaption>Harris response · 47,653 candidate corners</figcaption>
+                </figure>
+                <figure>
+                    <img src="./media/1/harris%20vs%20ANMS.png" alt="Corner locations before and after Adaptive Non-Maximal Suppression" loading="lazy" decoding="async">
+                    <figcaption>Without ANMS: 47,653 points · With ANMS: 500 points</figcaption>
+                </figure>
+            </div>
+        </section>
 
-        </div>
-    </section>
+        <section class="section" id="part-b2">
+            <h2>B.2 Feature Descriptor Extraction</h2>
+            <p class="desc">For each interest point, a larger 40×40 image neighborhood is sampled and blurred before downsampling to an 8×8 grayscale descriptor. Each descriptor is then normalized to zero mean and unit standard deviation.</p>
+            <p>The larger sampling window preserves more stable local structure, while brightness and contrast normalization make the descriptors less sensitive to overall illumination changes. The figure shows several street-scene patches and their normalized descriptors.</p>
+            <div class="image-grid">
+                <figure>
+                    <img src="./media/2/featureexample.png" alt="Examples of 40 by 40 image regions and their normalized 8 by 8 feature descriptors" loading="lazy" decoding="async">
+                    <figcaption>40×40 image patches sampled into normalized 8×8 descriptors</figcaption>
+                </figure>
+            </div>
+        </section>
 
-    <section class="section">
-        <h2>Part 3</h2>
-        <div class="desc">
-            sthsthsth
-        </div>
-        <div class="image-grid">
-            <figure>
-                <img src="./media/img6.jpg" alt="sthsthsth">
-                <figcaption>bulabulabula</figcaption>
-            </figure>
+        <section class="section" id="part-b3">
+            <h2>B.3 Feature Matching</h2>
+            <p class="desc">Descriptor distances are compared between overlapping street photographs. Lowe's nearest-neighbor distance ratio rejects ambiguous candidate correspondences.</p>
+            <p>Ratio thresholding produced 192 likely feature matches. Lines connect corresponding locations in the two images; these candidates are then passed to RANSAC for homography estimation.</p>
+            <div class="image-grid">
+                <figure>
+                    <img src="./media/3/featurematch.png" alt="192 feature correspondences drawn between two overlapping street photographs" loading="lazy" decoding="async">
+                    <figcaption>Descriptor matches · 192 candidate correspondences</figcaption>
+                </figure>
+            </div>
+        </section>
 
-        </div>
-    </section>
+        <section class="section" id="part-b4">
+            <h2>B.4 RANSAC for Robust Homography</h2>
+            <p class="desc">Four correspondence pairs are randomly sampled to estimate a homography. Inliers are counted using reprojection error, and the transform is re-estimated from the inlier set before mapping the images onto a shared canvas.</p>
+            <p>RANSAC classified 178 of the 192 matches as inliers. The inlier selection is shown first, followed by a manual and automatic stitching comparison for the same street scene.</p>
+            <article class="exercise">
+                <h3>RANSAC inlier selection</h3>
+                <div class="image-grid">
+                    <figure>
+                        <img src="./media/4/match_of_points.png" alt="RANSAC inlier and outlier correspondence lines between two street images" loading="lazy" decoding="async">
+                        <figcaption>RANSAC · 178 inliers from 192 feature matches</figcaption>
+                    </figure>
+                </div>
+            </article>
+            <article class="exercise">
+                <h3>Manual vs. automatic panorama</h3>
+                <p>The manual result uses correspondences selected by hand. The automatic result estimates the transform from descriptor matches using four-point RANSAC.</p>
+                <div class="image-grid">
+                    <figure>
+                        <img src="./media/4/hand.png" alt="Manually aligned street image mosaic" loading="lazy" decoding="async">
+                        <figcaption>Manual alignment</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./media/4/auto.png" alt="Automatically stitched color street panorama" loading="lazy" decoding="async">
+                        <figcaption>Automatic alignment · RANSAC homography</figcaption>
+                    </figure>
+                </div>
+            </article>
+            <p>The current Part B media folder contains one automatic panorama. The required set of at least three automatic mosaics is not yet included in the available assets.</p>
+        </section>
+
+    </main>
 
     <div class="footer">
-        © 2026 Henry Xue · CS180 Project 4
+        © 2026 Henry Xue · CS180 Project 4B
     </div>
 
 </body>
